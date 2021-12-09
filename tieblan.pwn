@@ -6,15 +6,15 @@ public OnGameModeInit()
 forward AutoSalonButtonBuy(player_id, const arg[]);
 public AutoSalonButtonBuy(player_id, const arg[])
 {
-   // тебе это не надо , не вырос еще extract arg -> new id_btn_vehicle;
+   extract arg -> new string:name_car[50], price, id_btn_vehicle;
    
-   SCM(player_id, -1, "Тут покупка и делай че хочешь, но я те скажу что так работать не будет! т.к надо передавать ид машины и его цену в JS код, затем их отправлять сюда и делать покупку спасибо");
+    //тут покупка по данным 
    return true;
 }
 //хз где будешь вызывать
-stock SetDataVehicleInfo(player_id, veh_name[], const price)
+stock SetDataVehicleInfo(player_id, veh_name[], veh_id, const price)
 {
-    cef_emit_event(player_id, "data:param", CEFSTR(veh_name), CEFINT(price)); 
+    cef_emit_event(player_id, "data:param", CEFSTR(veh_name), CEFINT(veh_id), CEFINT(price)); 
 
 }
 public OnPlayerSpawn(playerid)
@@ -23,6 +23,6 @@ public OnPlayerSpawn(playerid)
 }
 cmd:buycar(player_id)
 {
-   SetDataVehicleInfo(player_id, "Porsche Cain", 10000000);
+   SetDataVehicleInfo(player_id, "Porsche Cain", 411, 10000000);
 
 }
